@@ -1,0 +1,42 @@
+<body>
+  <div class="login-box">
+  <h2>Login</h2>
+  <div id="face">{{ face }}</div>
+
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <div class="input-box">
+      <input
+        id="username"
+        type="text"
+        formControlName="username"
+        placeholder=" "
+        class="input"
+      />
+      <label>Username</label>
+    </div>
+
+    <div class="input-box">
+      <input
+        id="password"
+        type="password"
+        formControlName="password"
+        placeholder=" "
+        class="input"
+      />
+      <label>Password</label>
+    </div>
+
+    <button
+      id="loginBtn"
+      type="submit"
+      [disabled]="loginForm.invalid"
+      [class.enabled]="loginForm.valid"
+      (mouseover)="onHover()"
+      (mouseleave)="onLeave()"
+    >
+      Login
+    </button>
+  </form>
+</div>
+
+</body>
