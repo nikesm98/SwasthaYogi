@@ -1,0 +1,139 @@
+
+    .content {
+      padding: 40px 20px;
+    }
+
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 32px;
+    }
+
+    .page-header h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #2E7D32;
+    }
+
+    .profile-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin-bottom: 32px;
+    }
+
+    .profile-section {
+      padding: 32px;
+    }
+
+    .profile-section h3 {
+      color: #2E7D32;
+      font-weight: 600;
+      margin-bottom: 24px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .save-section {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      margin-bottom: 32px;
+    }
+
+    .health-summary {
+      padding: 32px;
+    }
+
+    .health-summary h3 {
+      color: #2E7D32;
+      margin-bottom: 24px;
+    }
+
+    .summary-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .summary-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 20px;
+      background: linear-gradient(135deg, #E8F5E8 0%, #F1F8F1 100%);
+      border-radius: 12px;
+    }
+
+    .summary-item mat-icon {
+      font-size: 32px;
+      width: 32px;
+      height: 32px;
+      color: #4CAF50;
+    }
+
+    .summary-item h4 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #2E7D32;
+      margin: 0;
+    }
+
+    .summary-item span {
+      color: #666;
+      font-size: 0.9rem;
+    }
+
+    .nav-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 24px;
+      font-weight: 700;
+      color: #4CAF50;
+      text-decoration: none;
+    }
+
+    .active {
+      background-color: #E8F5E8;
+      color: #2E7D32;
+    }
+
+    @media (max-width: 768px) {
+      .profile-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+      
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+      
+      .summary-stats {
+        grid-template-columns: 1fr;
+      }
+      
+      .page-header {
+        flex-direction: column;
+        gap: 16px;
+        align-items: stretch;
+      }
+    }

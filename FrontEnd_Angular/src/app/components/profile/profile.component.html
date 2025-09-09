@@ -1,0 +1,148 @@
+
+    <div class="profile-container">
+      <!-- Header Navigation -->
+      <mat-toolbar class="nav-header">
+        <div class="container">
+          <div class="nav-content">
+            <a href="/dashboard" class="logo">
+              <mat-icon>local_hospital</mat-icon>
+              Swastha Yogi
+            </a>
+            <div class="nav-links">
+              <button mat-button (click)="router.navigate(['/dashboard'])">Dashboard</button>
+              <button mat-button (click)="router.navigate(['/medicine-timer'])">Medicine Timer</button>
+              <button mat-button (click)="router.navigate(['/medical-report'])">Medical Reports</button>
+              <button mat-button class="active">Profile</button>
+              <button mat-button (click)="logout()">
+                <mat-icon>logout</mat-icon>
+                Logout
+              </button>
+            </div>
+          </div>
+        </div>
+      </mat-toolbar>
+
+      <!-- Profile Content -->
+      <div class="container content">
+        <div class="page-header">
+          <h1>Health Profile</h1>
+          <button mat-raised-button color="accent" (click)="generateReport()" [disabled]="!isProfileComplete()">
+            <mat-icon>picture_as_pdf</mat-icon>
+            Generate Health Report
+          </button>
+        </div>
+
+        <div class="profile-grid">
+          <!-- Personal Information -->
+          <mat-card class="profile-section">
+            <h3>Personal Information</h3>
+            <form [formGroup]="personalForm">
+              <div class="form-row">
+                <mat-form-field appearance="outline">
+                  <mat-label>Full Name</mat-label>
+                  <input matInput formControlName="name">
+                </mat-form-field>
+                
+                <mat-form-field appearance="outline">
+                  <mat-label>Age</mat-label>
+                  <input matInput type="number" formControlName="age">
+                </mat-form-field>
+              </div>
+              
+              <mat-form-field appearance="outline">
+                <mat-label>Email</mat-label>
+                <input matInput type="email" formControlName="email" readonly>
+              </mat-form-field>
+              
+              <div class="form-row">
+                <mat-form-field appearance="outline">
+                  <mat-label>Phone Number</mat-label>
+                  <input matInput formControlName="phone">
+                </mat-form-field>
+                
+                <mat-form-field appearance="outline">
+                  <mat-label>Blood Type</mat-label>
+                  <mat-select formControlName="bloodType">
+                    <mat-option value="A+">A+</mat-option>
+                    <mat-option value="A-">A-</mat-option>
+                    <mat-option value="B+">B+</mat-option>
+                    <mat-option value="B-">B-</mat-option>
+                    <mat-option value="O+">O+</mat-option>
+                    <mat-option value="O-">O-</mat-option>
+                    <mat-option value="AB+">AB+</mat-option>
+                    <mat-option value="AB-">AB-</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              
+              <mat-form-field appearance="outline">
+                <mat-label>Emergency Contact</mat-label>
+                <input matInput formControlName="emergencyContact">
+              </mat-form-field>
+            </form>
+          </mat-card>
+
+          <!-- Medical Information -->
+          <mat-card class="profile-section">
+            <h3>Medical Information</h3>
+            <form [formGroup]="medicalForm">
+              <mat-form-field appearance="outline">
+                <mat-label>Known Allergies</mat-label>
+                <textarea matInput formControlName="allergies" rows="3" 
+                         placeholder="List any known allergies or drug reactions"></textarea>
+              </mat-form-field>
+              
+              <mat-form-field appearance="outline">
+                <mat-label>Medical History</mat-label>
+                <textarea matInput formControlName="medicalHistory" rows="4" 
+                         placeholder="Previous surgeries, chronic conditions, family history"></textarea>
+              </mat-form-field>
+              
+              <mat-form-field appearance="outline">
+                <mat-label>Current Medications</mat-label>
+                <textarea matInput formControlName="currentMedications" rows="3" 
+                         placeholder="List all current medications and supplements"></textarea>
+              </mat-form-field>
+            </form>
+          </mat-card>
+        </div>
+
+        <div class="save-section">
+          <button mat-raised-button color="primary" (click)="saveProfile()">
+            <mat-icon>save</mat-icon>
+            Save Profile
+          </button>
+          <button mat-button (click)="resetProfile()">
+            Reset Changes
+          </button>
+        </div>
+
+        <!-- Health Summary -->
+        <mat-card class="health-summary">
+          <h3>Health Summary</h3>
+          <div class="summary-stats">
+            <div class="summary-item">
+              <mat-icon>schedule</mat-icon>
+              <div>
+                <h4>{{activeMedicinesCount}}</h4>
+                <span>Active Medications</span>
+              </div>
+            </div>
+            <div class="summary-item">
+              <mat-icon>description</mat-icon>
+              <div>
+                <h4>{{reportsCount}}</h4>
+                <span>Medical Reports</span>
+              </div>
+            </div>
+            <div class="summary-item">
+              <mat-icon>trending_up</mat-icon>
+              <div>
+                <h4>{{getProfileCompleteness()}}%</h4>
+                <span>Profile Complete</span>
+              </div>
+            </div>
+          </div>
+        </mat-card>
+      </div>
+    </div>

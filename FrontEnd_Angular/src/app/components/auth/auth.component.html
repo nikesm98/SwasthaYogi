@@ -1,0 +1,90 @@
+<div class="auth-container">
+    <div class="auth-card">
+        <div class="auth-header">
+            <mat-icon class="auth-logo">local_hospital</mat-icon>
+            <h1>Swastha Yogi</h1>
+            <p>Your Health Management Platform</p>
+        </div>
+
+        <mat-tab-group (selectedTabChange)="onTabChange($event)">
+            <mat-tab label="Login">
+                <div class="tab-content">
+                    <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Email</mat-label>
+                            <input matInput type="email" formControlName="email" required>
+                            <mat-error *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+                                Please enter a valid email
+                            </mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline">
+                            <mat-label>Password</mat-label>
+                            <input matInput type="password" formControlName="password" required>
+                            <mat-error *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+                                Password is required
+                            </mat-error>
+                        </mat-form-field>
+
+                        <button mat-raised-button color="primary" type="submit" class="full-width"
+                            [disabled]="loginForm.invalid">
+                            Login
+                        </button>
+                    </form>
+                </div>
+            </mat-tab>
+
+            <mat-tab label="Sign Up">
+                <div class="tab-content">
+                    <form [formGroup]="signupForm" (ngSubmit)="onSignup()">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Full Name</mat-label>
+                            <input matInput type="text" formControlName="name" required>
+                            <mat-error *ngIf="signupForm.get('name')?.invalid && signupForm.get('name')?.touched">
+                                Name is required
+                            </mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline">
+                            <mat-label>Email</mat-label>
+                            <input matInput type="email" formControlName="email" required>
+                            <mat-error *ngIf="signupForm.get('email')?.invalid && signupForm.get('email')?.touched">
+                                Please enter a valid email
+                            </mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline">
+                            <mat-label>Password</mat-label>
+                            <input matInput type="password" formControlName="password" required>
+                            <mat-error
+                                *ngIf="signupForm.get('password')?.invalid && signupForm.get('password')?.touched">
+                                Password must be at least 6 characters
+                            </mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline">
+                            <mat-label>Confirm Password</mat-label>
+                            <input matInput type="password" formControlName="confirmPassword" required>
+                            <mat-error
+                                *ngIf="signupForm.get('confirmPassword')?.invalid && signupForm.get('confirmPassword')?.touched">
+                                Passwords must match
+                            </mat-error>
+                        </mat-form-field>
+
+                        <button mat-raised-button color="primary" type="submit" class="full-width"
+                            [disabled]="signupForm.invalid">
+                            Sign Up
+                        </button>
+                    </form>
+                </div>
+            </mat-tab>
+        </mat-tab-group>
+
+        <div class="auth-footer">
+            <button mat-button (click)="goToLanding()">
+                <mat-icon>arrow_back</mat-icon>
+                Back to Home
+            </button>
+        </div>
+    </div>
+</div>

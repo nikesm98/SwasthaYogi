@@ -1,0 +1,124 @@
+
+    <div class="medicine-container">
+      <!-- Header Navigation -->
+      <mat-toolbar class="nav-header">
+        <div class="container">
+          <div class="nav-content">
+            <a href="/dashboard" class="logo">
+              <mat-icon>local_hospital</mat-icon>
+              Swastha Yogi
+            </a>
+            <div class="nav-links">
+              <button mat-button (click)="router.navigate(['/dashboard'])">Dashboard</button>
+              <button mat-button class="active">Medicine Timer</button>
+              <button mat-button (click)="router.navigate(['/medical-report'])">Medical Reports</button>
+              <button mat-button (click)="router.navigate(['/profile'])">Profile</button>
+              <button mat-button (click)="logout()">
+                <mat-icon>logout</mat-icon>
+                Logout
+              </button>
+            </div>
+          </div>
+        </div>
+      </mat-toolbar>
+
+      <!-- Medicine Timer Content -->
+      <div class="container content">
+        <div class="page-header">
+          <h1>Medicine Timer</h1>
+          <button mat-raised-button color="primary" (click)="toggleAddForm()">
+            <mat-icon>add</mat-icon>
+            Add Medicine
+          </button>
+        </div>
+
+        <!-- Add Medicine Form -->
+        <mat-card class="form-card" *ngIf="showAddForm">
+          <h3>Add New Medicine</h3>
+          <form [formGroup]="medicineForm" (ngSubmit)="addMedicine()">
+            <div class="form-row">
+              <mat-form-field appearance="outline">
+                <mat-label>Medicine Name</mat-label>
+                <input matInput formControlName="name" placeholder="e.g., Vitamin D3">
+              </mat-form-field>
+              
+              <mat-form-field appearance="outline">
+                <mat-label>Dosage</mat-label>
+                <input matInput formControlName="dosage" placeholder="e.g., 500mg">
+              </mat-form-field>
+            </div>
+            
+            <div class="form-row">
+              <mat-form-field appearance="outline">
+                <mat-label>Time</mat-label>
+                <input matInput type="time" formControlName="time">
+              </mat-form-field>
+              
+              <mat-form-field appearance="outline">
+                <mat-label>Frequency</mat-label>
+                <mat-select formControlName="frequency">
+                  <mat-option value="daily">Daily</mat-option>
+                  <mat-option value="twice-daily">Twice Daily</mat-option>
+                  <mat-option value="thrice-daily">Thrice Daily</mat-option>
+                  <mat-option value="weekly">Weekly</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            
+            <div class="form-actions">
+              <button mat-button type="button" (click)="cancelAdd()">Cancel</button>
+              <button mat-raised-button color="primary" type="submit" [disabled]="medicineForm.invalid">
+                Add Medicine
+              </button>
+            </div>
+          </form>
+        </mat-card>
+
+        <!-- Medicine List -->
+        <div class="medicines-grid">
+          <mat-card class="medicine-card card-hover" *ngFor="let medicine of medicines">
+            <div class="medicine-header">
+              <div class="medicine-info">
+                <h4>{{medicine.name}}</h4>
+                <p>{{medicine.dosage}} - {{medicine.frequency}}</p>
+              </div>
+              <div class="medicine-actions">
+                <button mat-icon-button (click)="toggleMedicine(medicine)">
+                  <mat-icon [style.color]="medicine.isActive ? '#4CAF50' : '#666'">
+                    {{medicine.isActive ? 'notifications_active' : 'notifications_off'}}
+                  </mat-icon>
+                </button>
+                <button mat-icon-button color="warn" (click)="deleteMedicine(medicine.id)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+            </div>
+            
+            <div class="medicine-timing">
+              <div class="timing-info">
+                <mat-icon>schedule</mat-icon>
+                <span>{{medicine.time}}</span>
+              </div>
+              <div class="status" [class]="medicine.isActive ? 'status-active' : 'status-pending'">
+                {{medicine.isActive ? 'Active' : 'Inactive'}}
+              </div>
+            </div>
+            
+            <div class="next-dose" *ngIf="medicine.nextDose && medicine.isActive">
+              <small>Next dose: {{formatNextDose(medicine.nextDose)}}</small>
+            </div>
+          </mat-card>
+
+          <!-- Empty State -->
+          <div class="empty-state" *ngIf="medicines.length === 0">
+            <mat-icon class="empty-icon">medication</mat-icon>
+            <h3>No medicines added yet</h3>
+            <p>Add your first medicine to start tracking your medication schedule</p>
+            <button mat-raised-button color="primary" (click)="toggleAddForm()">
+              <mat-icon>add</mat-icon>
+              Add Your First Medicine
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>

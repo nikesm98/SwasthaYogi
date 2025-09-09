@@ -1,0 +1,83 @@
+<div class="landing-container">
+    <!-- Header Navigation -->
+    <mat-toolbar class="nav-header">
+        <div class="container">
+            <div class="nav-content">
+                <a href="#" class="logo">
+                    <mat-icon>local_hospital</mat-icon>
+                    Swastha Yogi
+                </a>
+                <div class="nav-links">
+                    <button mat-button *ngIf="!isLoggedIn" (click)="goToAuth()">Login</button>
+                    <button mat-raised-button color="primary" *ngIf="!isLoggedIn" (click)="goToAuth()">Get
+                        Started</button>
+                    <button mat-button *ngIf="isLoggedIn" (click)="goToDashboard()">Dashboard</button>
+                    <button mat-button *ngIf="isLoggedIn" (click)="logout()">Logout</button>
+                </div>
+            </div>
+        </div>
+    </mat-toolbar>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Your Health, Your Control</h1>
+                <p class="hero-subtitle">
+                    Manage your medications, track your health reports, and stay on top of your wellness journey with
+                    Swastha Yogi.
+                </p>
+                <div class="hero-actions">
+                    <button mat-raised-button color="primary" class="btn-large" (click)="goToAuth()">
+                        Start Your Health Journey
+                    </button>
+                    <button mat-button class="btn-outline" (click)="scrollToFeatures()">
+                        Learn More
+                    </button>
+                </div>
+            </div>
+            <div class="hero-image">
+                <mat-icon class="hero-icon">favorite</mat-icon>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features-section">
+        <div class="container">
+            <h2 class="section-title">Comprehensive Health Management</h2>
+            <div class="features-grid">
+                <mat-card class="feature-card card-hover medicine-timer">
+                    <mat-icon class="feature-icon">schedule</mat-icon>
+                    <h3>Medicine Timer</h3>
+                    <p>Never miss a dose with smart medication reminders and timing alerts.</p>
+                </mat-card>
+
+                <mat-card class="feature-card card-hover report-card">
+                    <mat-icon class="feature-icon">description</mat-icon>
+                    <h3>Medical Reports</h3>
+                    <p>Upload and analyze your medical reports with AI-powered insights.</p>
+                </mat-card>
+
+                <mat-card class="feature-card card-hover profile-card">
+                    <mat-icon class="feature-icon">person</mat-icon>
+                    <h3>Health Profile</h3>
+                    <p>Maintain your complete health profile and generate detailed reports.</p>
+                </mat-card>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Take Control of Your Health?</h2>
+                <p>Join thousands of users who trust Swastha Yogi for their healthcare management.</p>
+                <button mat-raised-button color="primary" class="btn-large" (click)="goToAuth()">
+                    Get Started Today
+                </button>
+            </div>
+        </div>
+    </section>
+</div>

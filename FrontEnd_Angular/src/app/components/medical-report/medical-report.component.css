@@ -1,0 +1,172 @@
+
+    .content {
+      padding: 40px 20px;
+    }
+
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 32px;
+    }
+
+    .page-header h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #2E7D32;
+    }
+
+    .upload-card {
+      margin-bottom: 32px;
+      padding: 32px;
+    }
+
+    .upload-progress {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .upload-text h4 {
+      color: #2E7D32;
+      margin-bottom: 8px;
+    }
+
+    .upload-text p {
+      color: #666;
+      margin: 0;
+    }
+
+    .reports-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 24px;
+    }
+
+    .report-card {
+      padding: 24px;
+    }
+
+    .report-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 16px;
+    }
+
+    .report-info h4 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #2E7D32;
+      margin-bottom: 4px;
+    }
+
+    .report-info p {
+      color: #666;
+      margin: 0;
+      font-size: 0.9rem;
+    }
+
+    .report-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .analysis-panel {
+      margin-top: 16px;
+      box-shadow: none;
+      border: 1px solid #e0e0e0;
+    }
+
+    .analysis-content {
+      padding: 16px 0;
+    }
+
+    .analysis-section {
+      margin-bottom: 20px;
+    }
+
+    .analysis-section h5 {
+      color: #2E7D32;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .analysis-section p {
+      color: #333;
+      line-height: 1.6;
+    }
+
+    .analysis-section ul {
+      margin: 0;
+      padding-left: 20px;
+    }
+
+    .analysis-section li {
+      color: #333;
+      margin-bottom: 4px;
+    }
+
+    .empty-state {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 60px 20px;
+    }
+
+    .empty-icon {
+      font-size: 64px;
+      width: 64px;
+      height: 64px;
+      color: #ccc;
+      margin-bottom: 16px;
+    }
+
+    .empty-state h3 {
+      color: #666;
+      margin-bottom: 8px;
+    }
+
+    .empty-state p {
+      color: #999;
+      margin-bottom: 24px;
+    }
+
+    .nav-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 24px;
+      font-weight: 700;
+      color: #4CAF50;
+      text-decoration: none;
+    }
+
+    .active {
+      background-color: #E8F5E8;
+      color: #2E7D32;
+    }
+
+    @media (max-width: 768px) {
+      .reports-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .page-header {
+        flex-direction: column;
+        gap: 16px;
+        align-items: stretch;
+      }
+    }

@@ -1,0 +1,138 @@
+<div class="dashboard-container">
+    <!-- Header Navigation -->
+    <mat-toolbar class="nav-header">
+        <div class="container">
+            <div class="nav-content" style="display: flex; align-items: center; justify-content: space-between;">
+                <a href="/dashboard" class="logo" style="display: flex; align-items: center; margin-right: 32px;">
+                    <mat-icon>local_hospital</mat-icon>
+                    <span style="font-weight: bold; font-size: 1.3em; margin-left: 8px;">Swastha Yogi</span>
+                </a>
+                <div class="nav-links" style="flex: 1; display: flex; justify-content: center; gap: 16px;">
+                    <button mat-button class="active">Dashboard</button>
+                    <button mat-button (click)="navigateToMedicine()">
+                        <mat-icon matBadge="{{pendingMedicines}}" matBadgeColor="warn"
+                            [matBadgeHidden]="pendingMedicines === 0">schedule</mat-icon>
+                        Medicine Timer
+                    </button>
+                    <button mat-button (click)="navigateToReports()">Medical Reports</button>
+                    <button mat-button (click)="navigateToProfile()">Profile</button>
+                    <button mat-button (click)="logout()">
+                        <mat-icon>logout</mat-icon>
+                        Logout
+                    </button>
+                </div>
+            </div>
+        </div>
+    </mat-toolbar>
+
+    <!-- Dashboard Content -->
+    <div class="container dashboard-content">
+        <div class="welcome-section">
+            <h1>Welcome back, {{currentUser?.name}}!</h1>
+            <p>Here's an overview of your health management today</p>
+        </div>
+
+        <div class="dashboard-grid">
+            <!-- Medicine Overview Card -->
+            <mat-card class="dashboard-card card-hover medicine-timer" (click)="navigateToMedicine()">
+                <div class="card-header">
+                    <mat-icon class="card-icon">schedule</mat-icon>
+                    <div class="card-title">
+                        <h3>Medicine Timer</h3>
+                        <p>{{activeMedicines}} active medications</p>
+                    </div>
+                    <mat-icon class="status-icon" [class.notification-bell]="pendingMedicines > 0">
+                        {{pendingMedicines > 0 ? 'notifications_active' : 'notifications_none'}}
+                    </mat-icon>
+                </div>
+                <div class="card-stats">
+                    <div class="stat">
+                        <span class="stat-number">{{pendingMedicines}}</span>
+                        <span class="stat-label">Due Now</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">{{todayDoses}}</span>
+                        <span class="stat-label">Today's Doses</span>
+                    </div>
+                </div>
+            </mat-card>
+
+            <!-- Medical Reports Card -->
+            <mat-card class="dashboard-card card-hover report-card" (click)="navigateToReports()">
+                <div class="card-header">
+                    <mat-icon class="card-icon">description</mat-icon>
+                    <div class="card-title">
+                        <h3>Medical Reports</h3>
+                        <p>{{totalReports}} reports stored</p>
+                    </div>
+                    <mat-icon class="status-icon">folder</mat-icon>
+                </div>
+                <div class="card-stats">
+                    <div class="stat">
+                        <span class="stat-number">{{recentReports}}</span>
+                        <span class="stat-label">This Month</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">{{analyzedReports}}</span>
+                        <span class="stat-label">Analyzed</span>
+                    </div>
+                </div>
+            </mat-card>
+
+            <!-- Profile Card -->
+            <mat-card class="dashboard-card card-hover profile-card" (click)="navigateToProfile()">
+                <div class="card-header">
+                    <mat-icon class="card-icon">person</mat-icon>
+                    <div class="card-title">
+                        <h3>Health Profile</h3>
+                        <p>Complete your profile</p>
+                    </div>
+                    <mat-icon class="status-icon">arrow_forward</mat-icon>
+                </div>
+                <div class="card-stats">
+                    <div class="stat">
+                        <span class="stat-number">85%</span>
+                        <span class="stat-label">Profile Complete</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">3</span>
+                        <span class="stat-label">Health Goals</span>
+                    </div>
+                </div>
+            </mat-card>
+
+            <!-- Quick Actions Card -->
+            <mat-card class="dashboard-card quick-actions">
+                <h3>Quick Actions</h3>
+                <div class="actions-grid">
+                    <button mat-raised-button color="primary" (click)="navigateToMedicine()">
+                        <mat-icon>add</mat-icon>
+                        Add Medicine
+                    </button>
+                    <button mat-raised-button color="accent" (click)="navigateToReports()">
+                        <mat-icon>upload</mat-icon>
+                        Upload Report
+                    </button>
+                    <button mat-stroked-button (click)="navigateToProfile()">
+                        <mat-icon>edit</mat-icon>
+                        Edit Profile
+                    </button>
+                </div>
+            </mat-card>
+        </div>
+
+        <!-- Recent Activity -->
+        <mat-card class="dashboard-card recent-activity">
+            <h3>Recent Activity</h3>
+            <div class="activity-list">
+                <div class="activity-item" *ngFor="let activity of recentActivity">
+                    <mat-icon [style.color]="activity.color">{{activity.icon}}</mat-icon>
+                    <div class="activity-content">
+                        <span>{{activity.message}}</span>
+                        <small>{{activity.time}}</small>
+                    </div>
+                </div>
+            </div>
+        </mat-card>
+    </div>
+</div>

@@ -1,0 +1,116 @@
+
+    <div class="report-container">
+      <!-- Header Navigation -->
+      <mat-toolbar class="nav-header">
+        <div class="container">
+          <div class="nav-content">
+            <a href="/dashboard" class="logo">
+              <mat-icon>local_hospital</mat-icon>
+              Swastha Yogi
+            </a>
+            <div class="nav-links">
+              <button mat-button (click)="router.navigate(['/dashboard'])">Dashboard</button>
+              <button mat-button (click)="router.navigate(['/medicine-timer'])">Medicine Timer</button>
+              <button mat-button class="active">Medical Reports</button>
+              <button mat-button (click)="router.navigate(['/profile'])">Profile</button>
+              <button mat-button (click)="logout()">
+                <mat-icon>logout</mat-icon>
+                Logout
+              </button>
+            </div>
+          </div>
+        </div>
+      </mat-toolbar>
+
+      <!-- Medical Report Content -->
+      <div class="container content">
+        <div class="page-header">
+          <h1>Medical Reports</h1>
+          <button mat-raised-button color="primary" (click)="triggerFileUpload()">
+            <mat-icon>upload</mat-icon>
+            Upload Report
+          </button>
+        </div>
+
+        <input type="file" #fileInput (change)="onFileSelected($event)" 
+               accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" style="display: none;">
+
+        <!-- Upload Section -->
+        <mat-card class="upload-card" *ngIf="isUploading">
+          <div class="upload-progress">
+            <mat-spinner diameter="40"></mat-spinner>
+            <div class="upload-text">
+              <h4>Analyzing Report...</h4>
+              <p>Our AI is processing your medical document</p>
+            </div>
+          </div>
+        </mat-card>
+
+        <!-- Reports List -->
+        <div class="reports-grid">
+          <mat-card class="report-card card-hover" *ngFor="let report of reports">
+            <div class="report-header">
+              <div class="report-info">
+                <h4>{{report.fileName}}</h4>
+                <p>{{getReportTypeDisplay(report.type)}} - {{formatDate(report.uploadDate)}}</p>
+              </div>
+              <div class="report-actions">
+                <button mat-icon-button [disabled]="!report.summary">
+                  <mat-icon [style.color]="report.summary ? '#4CAF50' : '#ccc'">smart_toy</mat-icon>
+                </button>
+                <button mat-icon-button color="warn" (click)="deleteReport(report.id)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+            </div>
+
+            <mat-expansion-panel class="analysis-panel" *ngIf="report.summary">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <mat-icon>psychology</mat-icon>
+                  AI Analysis Results
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              
+              <div class="analysis-content">
+                <div class="analysis-section">
+                  <h5>Summary</h5>
+                  <p>{{report.summary}}</p>
+                </div>
+                
+                <div class="analysis-section" *ngIf="report.diagnosis">
+                  <h5>Diagnosis</h5>
+                  <p>{{report.diagnosis}}</p>
+                </div>
+                
+                <div class="analysis-section" *ngIf="report.medications && report.medications.length > 0">
+                  <h5>Medications</h5>
+                  <mat-chip-set>
+                    <mat-chip *ngFor="let med of report.medications">{{med}}</mat-chip>
+                  </mat-chip-set>
+                </div>
+                
+                <div class="analysis-section" *ngIf="report.recommendations && report.recommendations.length > 0">
+                  <h5>Recommendations</h5>
+                  <ul>
+                    <li *ngFor="let rec of report.recommendations">{{rec}}</li>
+                  </ul>
+                </div>
+              </div>
+            </mat-expansion-panel>
+          </mat-card>
+
+          <!-- Empty State -->
+          <div class="empty-state" *ngIf="reports.length === 0 && !isUploading">
+            <mat-icon class="empty-icon">description</mat-icon>
+            <h3>No reports uploaded yet</h3>
+            <p>Upload your first medical report to get AI-powered insights</p>
+            <button mat-raised-button color="primary" (click)="triggerFileUpload()">
+              <mat-icon>upload</mat-icon>
+              Upload Your First Report
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  
