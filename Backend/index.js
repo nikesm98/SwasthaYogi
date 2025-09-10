@@ -19,13 +19,13 @@ app.use('/api/medical-report', medicalReportRoutes);
 const PORT = process.env.PORT || 3000;
 
 if (process.env.NODE_ENV !== 'test') {
-    mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true })
+    mongoose.connect(process.env.MONGO_URI)
         .then(() => {
             app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
         })
         .catch(err => console.error('MongoDB connection error:', err));
 } else {
-    mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+    mongoose.connect(process.env.MONGO_URI);
 }
 
 export default app;

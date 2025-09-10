@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: swasthayogi-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: swasthayogi-backend
+  template:
+    metadata:
+      labels:
+        app: swasthayogi-backend
+    spec:
+      containers:
+      - name: backend
+        image: nikhilsm23/swasthayogi-backend:latest
+        ports:
+        - containerPort: 3000
+        env:
+        - name: MONGO_URI
+          value: mongodb://mongo:27017/swasthayogi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: swasthayogi-backend
+spec:
+  selector:
+    app: swasthayogi-backend
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
